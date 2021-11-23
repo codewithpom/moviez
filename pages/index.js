@@ -19,6 +19,12 @@ export default function Home() {
         <meta name="author" content="Padmashree Jha" />
         <meta name="publisher" content="Padmashree Jha" />
         <meta name="description" content="Search any movie on the internet" />
+        <meta name="copyright" content="Padmashree Jha" />
+        <meta name="robots" content="index, follow" />
+        <meta property="og:title" content="Search for any movie" />
+        <meta property={"og:type"} content={"website"} />
+        <meta property={"og:image"} content={"https://image.tmdb.org/t/p/original//78lPtwv72eTNqFW9COBYI0dWDJa.jpg"} />
+
       </Head>
       <Form func={setMovies} /> {/* Form here */}
       <br />
