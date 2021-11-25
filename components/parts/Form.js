@@ -2,14 +2,14 @@ import { useState, useEffect } from 'react'
 import PropTypes from "prop-types";
 
 export default function Form(props) {
-   useEffect(() => {
-	   document.addEventListener('keydown', function(event) {
-		   if (event.keyCode == 191){
-			   event.preventDefault();
-			   document.getElementById('input').focus()
-		   }
-	   });
-   }, []) 
+    useEffect(() => {
+        document.addEventListener('keydown', function (event) {
+            if (event.keyCode != 191) return null;
+            event.preventDefault();
+            document.getElementById('input').focus()
+
+        });
+    }, [])
 
     const [search, setSearch] = useState("");
     function handleChange(e) {
@@ -20,6 +20,8 @@ export default function Form(props) {
         e.preventDefault();
         // fetch data from API
         console.log(search);
+        if (search.length < 1) return;
+
         const url = "/api/movies_search?query=" + search;
         fetch(url)
             .then(response => response.json())
@@ -42,7 +44,7 @@ export default function Form(props) {
                     aria-label={"Search"}
                     value={search}
                     onChange={handleChange}
-	    	    id={"input"}
+                    id={"input"}
                 />
 
                 <br />
