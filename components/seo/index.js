@@ -3,7 +3,7 @@ export default function Seo() {
         <>
             <title>Search for any movie</title>
             <link rel={"icon"} href={"/favicon.ico"} />
-            <meta http-equiv={"content-language"} content={"en"} />
+            <meta httpEquiv={"content-language"} content={"en"} />
             <meta charset={"UTF-8"} />
             <meta name={"viewport"} content={"width=device-width, initial-scale=1.0"} />
             <meta name={"keywords"} content={"movie, search, random"} />
