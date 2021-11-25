@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import PropTypes from "prop-types";
 
 export default function Form(props) {
+    const [empty, setEmpty] = useState(false);
     useEffect(() => {
         document.addEventListener('keydown', function (event) {
             if (event.keyCode != 191) return null;
@@ -20,8 +21,8 @@ export default function Form(props) {
         e.preventDefault();
         // fetch data from API
         console.log(search);
-        if (search.length < 1) return;
-
+        if (search.length < 1) { setEmpty(true); return null };
+        setEmpty(false);
         const url = "/api/movies_search?query=" + search;
         fetch(url)
             .then(response => response.json())
@@ -54,6 +55,18 @@ export default function Form(props) {
                         type={"submit"}
                     >Search</button>
                 </div>
+                <br />
+
+
+                {empty ?
+                    <div class="alert alert-danger" role="alert">
+                        <div className="text-center">
+                            Search query cannot be empty
+                        </div>
+                    </div>
+                    : null}
+
+
 
             </form>
         </>
