@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 export default function Form(props) {
     const [empty, setEmpty] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [noresult, setNoresult] = useState(false);
     useEffect(() => {
         document.addEventListener('keydown', function (event) {
             if (event.keyCode != 191) return null;
@@ -18,6 +19,13 @@ export default function Form(props) {
         setSearch(e.target.value);
     }
 
+    function send(response) {
+        if (response.results.length < 1) setNoresult(true);
+        else setNoresult(false);
+
+        props.func(response.results)
+    }
+
     function handleSubmit(e) {
         e.preventDefault();
         // fetch data from API
@@ -28,7 +36,7 @@ export default function Form(props) {
         const url = "/api/movies_search?query=" + search;
         fetch(url)
             .then(response => response.json())
-            .then(response => { setLoading(false); props.func(response.results) });
+            .then(response => { setLoading(false); send(response) });
 
     }
 
@@ -72,10 +80,19 @@ export default function Form(props) {
                 {loading ?
                     <div className="text-center">
                         <div class="spinner-border" role="status">
-                            <span class="sr-only"></span>
+                            <span className="sr-only"></span>
                         </div>
                     </div>
                     : null}
+
+                {noresult ?
+                    <div class="alert alert-danger" role="alert">
+                        <div className="text-center">
+                            No result found
+                        </div>
+                    </div>
+                    : null}
+
 
 
 
