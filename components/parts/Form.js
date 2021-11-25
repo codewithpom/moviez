@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 
 export default function Form(props) {
     const [empty, setEmpty] = useState(false);
+    const [loading, setLoading] = useState(false);
     useEffect(() => {
         document.addEventListener('keydown', function (event) {
             if (event.keyCode != 191) return null;
@@ -22,11 +23,12 @@ export default function Form(props) {
         // fetch data from API
         console.log(search);
         if (search.length < 1) { setEmpty(true); return null };
+        setLoading(true);
         setEmpty(false);
         const url = "/api/movies_search?query=" + search;
         fetch(url)
             .then(response => response.json())
-            .then(response => props.func(response.results));
+            .then(response => { setLoading(false); props.func(response.results) });
 
     }
 
@@ -65,6 +67,16 @@ export default function Form(props) {
                         </div>
                     </div>
                     : null}
+
+
+                {loading ?
+                    <div className="text-center">
+                        <div class="spinner-border" role="status">
+                            <span class="sr-only"></span>
+                        </div>
+                    </div>
+                    : null}
+
 
 
 
