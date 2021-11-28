@@ -17,6 +17,7 @@ export default function Seo() {
             <meta property={"og:type"} content={"website"} />
             <meta property={"og:image"} content={"https://image.tmdb.org/t/p/original//78lPtwv72eTNqFW9COBYI0dWDJa.jpg"} />
             <meta property={"og:url"} content={"http://moviez-nu.vercel.app/"} />
+            <meta name="google-site-verification" content="5CUSrmIx1WaE_b-YiA6tpsxnC7G6V6uk2iyx5vp2G1w" />
         </>
     )
 }
